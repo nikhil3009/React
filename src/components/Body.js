@@ -19,10 +19,10 @@ const Body = () => {
 		const json = await data.json();
 		console.log(json);
 		setListOfRestaurants(
-			json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+			json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
 		);
 		setfilteredRestaurant(
-			json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+			json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
 		);
 	};
 
@@ -36,17 +36,18 @@ const Body = () => {
 	}
 
 	return (
-		<div className='body'>
-			<div className='filter'>
-				<div className='search'>
+		<div className='body bg-red-100'>
+			<div className='filter flex'>
+				<div className='m-4 p-4'>
 					<input
 						type='text'
-						className='search-box'
+						className='border-solid border-black'
 						value={searchtext}
 						onChange={(e) => {
 							setSearchtext(e.target.value);
 						}}></input>
 					<button
+						className='px-4 py-2 bg-green-100 m-4 items-center rounded-lg'
 						onClick={() => {
 							const filteredSearch = listOfRestaurants.filter((res) =>
 								res.info.name.toLowerCase().includes(searchtext.toLowerCase())
@@ -56,18 +57,20 @@ const Body = () => {
 						Search
 					</button>
 				</div>
-				<button
-					className='filter-btn'
-					onClick={() => {
-						const fliteredList = listOfRestaurants.filter(
-							(res) => res.info.avgRating > 4
-						);
-						setfilteredRestaurant(fliteredList);
-					}}>
-					Top Rated Restaurants
-				</button>
+				<div className='m-4 p-4 flex items-center '>
+					<button
+						className='px-4 py2 bg-blue-200 rounded-lg'
+						onClick={() => {
+							const fliteredList = listOfRestaurants.filter(
+								(res) => res.info.avgRating > 4
+							);
+							setfilteredRestaurant(fliteredList);
+						}}>
+						Top Rated Restaurants
+					</button>
+				</div>
 			</div>
-			<div className='res-container'>
+			<div className='flex flex-wrap'>
 				{filteredRestaurant.map((restaurant) => (
 					<Link
 						key={restaurant.info.id}
