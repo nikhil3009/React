@@ -1,14 +1,17 @@
 /** @format */
 
 import RestaurantCard from './RestaurantCard';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
+import UserContext from '../utils/UserContext';
 const Body = () => {
 	const [listOfRestaurants, setListOfRestaurants] = useState([]);
 	const [filteredRestaurant, setfilteredRestaurant] = useState([]);
 	const [searchtext, setSearchtext] = useState('');
+	const { loggedInUser, setUserName } = useContext(UserContext);
+
 	console.log('Body rendered', listOfRestaurants);
 	useEffect(() => {
 		fetchData();
@@ -20,10 +23,10 @@ const Body = () => {
 		const json = await data.json();
 		console.log(json);
 		setListOfRestaurants(
-			json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+			json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
 		);
 		setfilteredRestaurant(
-			json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+			json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
 		);
 	};
 
@@ -69,6 +72,14 @@ const Body = () => {
 						}}>
 						Top Rated Restaurants
 					</button>
+				</div>
+				<div className='m-4 p-4 flex items-center '>
+					<label className='text-bold p-2'>UserName:</label>
+					<input
+						className='border border-black p-2'
+						value={loggedInUser}
+						onChange={(e) => setUserName(e.target.value)}
+					/>
 				</div>
 			</div>
 			<div className='flex flex-wrap'>
