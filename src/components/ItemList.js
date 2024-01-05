@@ -1,7 +1,13 @@
 /** @format */
+
+import { addItem } from '../utils/cartSlice';
+import { useDispatch } from 'react-redux';
 import { CDN_URL } from '../utils/constants';
 const ItemList = ({ items }) => {
-	console.log('here', items);
+	const dispatch = useDispatch();
+	const handleAddItem = (item) => {
+		dispatch(addItem(item));
+	};
 	return (
 		<div>
 			{items.map((item) => (
@@ -16,6 +22,11 @@ const ItemList = ({ items }) => {
 						<span className='py-2'> {item.card.info.name}</span>
 						<span> - ₹{item.card.info.price / 100}</span>
 					</div>
+					<button
+						onClick={() => handleAddItem(item)}
+						className='bg-blue-300 shadow-md rounded-md p-2 cursor-pointer'>
+						Add Item
+					</button>
 				</div>
 			))}
 		</div>

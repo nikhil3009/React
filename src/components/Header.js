@@ -3,12 +3,14 @@ import { useState, useContext } from 'react';
 import { LOGO_URL } from '../utils/constants';
 import { Link } from 'react-router-dom';
 import UserContext from '../utils/UserContext';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
 	const [loginBtn, setloginBtn] = useState('Login');
 	const { loggedInUser } = useContext(UserContext);
+	const cartItems = useSelector((store) => store.cart.items);
 	return (
-		<div className='flex justify-between bg-rose-300 shadow-lg mb-2 mt-2 mr-2 ml-2 px'>
+		<div className='flex justify-between bg-white shadow-lg mb-2 mt-2 mr-2 ml-2 px'>
 			<div className='logo-container'>
 				<img
 					className='w-56'
@@ -25,7 +27,9 @@ const Header = () => {
 					<li className='px-4  bg-white font-bold'>
 						<Link to='/contact'>Contact Us </Link>
 					</li>
-					<li className='px-4  bg-white font-bold'>Cart</li>
+					<li className='px-4  bg-white font-bold cursor-pointer'>
+						<Link to='/cart'> 🛒 ({cartItems.length})</Link>
+					</li>
 					<button
 						className='login px-4  bg-white font-bold'
 						onClick={() => {
