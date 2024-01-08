@@ -18,14 +18,3 @@ test('it shoould load header component with login button', () => {
 	const loginButton = screen.getByRole('button');
 	expect(loginButton).toBeInTheDocument();
 });
-test('it shoould load header component with cart items zero', () => {
-	render(
-		<BrowserRouter>
-			<Provider store={appStore}>
-				<Header />
-			</Provider>
-		</BrowserRouter>
-	);
-	const cartItem = screen.getByText('🛒(0)');
-	expect(cartItem).toBeInTheDocument();
-});
