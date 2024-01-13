@@ -6,6 +6,7 @@ import Shimmer from './Shimmer';
 import { Link } from 'react-router-dom';
 import useOnlineStatus from '../utils/useOnlineStatus';
 import UserContext from '../utils/UserContext';
+import { CORSPROXY } from '../utils/constants';
 const Body = () => {
 	const [listOfRestaurants, setListOfRestaurants] = useState([]);
 	const [filteredRestaurant, setfilteredRestaurant] = useState([]);
@@ -18,7 +19,7 @@ const Body = () => {
 	}, []);
 	const fetchData = async () => {
 		const data = await fetch(
-			'https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
+			`${CORSPROXY}https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.406498&lng=78.47724389999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING`
 		);
 		const json = await data.json();
 		console.log(json);
